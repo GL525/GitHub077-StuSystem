@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kgc.zjh.mapper.StandardMapper" >
+  <resultMap id="BaseResultMap" type="com.kgc.zjh.pojo.Standard" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="std_num" property="stdNum" jdbcType="VARCHAR" />
+    <result column="zhname" property="zhname" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="keyss" property="keyss" jdbcType="VARCHAR" />
+    <result column="release_date" property="releaseDate" jdbcType="DATE" />
+    <result column="impl_date" property="implDate" jdbcType="DATE" />
+    <result column="package_path" property="packagePath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, std_num, zhname, version, keyss, release_date, impl_date, package_path
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.kgc.zjh.pojo.StandardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from standard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from standard
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from standard
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.kgc.zjh.pojo.StandardExample" >
+    delete from standard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.kgc.zjh.pojo.Standard" >
+    insert into standard (id, std_num, zhname, 
+      version, keyss, release_date, 
+      impl_date, package_path)
+    values (#{id,jdbcType=INTEGER}, #{stdNum,jdbcType=VARCHAR}, #{zhname,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, #{keyss,jdbcType=VARCHAR}, #{releaseDate,jdbcType=DATE}, 
+      #{implDate,jdbcType=DATE}, #{packagePath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kgc.zjh.pojo.Standard" >
+    insert into standard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stdNum != null" >
+        std_num,
+      </if>
+      <if test="zhname != null" >
+        zhname,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="keyss != null" >
+        keyss,
+      </if>
+      <if test="releaseDate != null" >
+        release_date,
+      </if>
+      <if test="implDate != null" >
+        impl_date,
+      </if>
+      <if test="packagePath != null" >
+        package_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stdNum != null" >
+        #{stdNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zhname != null" >
+        #{zhname,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="keyss != null" >
+        #{keyss,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        #{releaseDate,jdbcType=DATE},
+      </if>
+      <if test="implDate != null" >
+        #{implDate,jdbcType=DATE},
+      </if>
+      <if test="packagePath != null" >
+        #{packagePath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.kgc.zjh.pojo.StandardExample" resultType="java.lang.Integer" >
+    select count(*) from standard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update standard
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stdNum != null" >
+        std_num = #{record.stdNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhname != null" >
+        zhname = #{record.zhname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyss != null" >
+        keyss = #{record.keyss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releaseDate != null" >
+        release_date = #{record.releaseDate,jdbcType=DATE},
+      </if>
+      <if test="record.implDate != null" >
+        impl_date = #{record.implDate,jdbcType=DATE},
+      </if>
+      <if test="record.packagePath != null" >
+        package_path = #{record.packagePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update standard
+    set id = #{record.id,jdbcType=INTEGER},
+      std_num = #{record.stdNum,jdbcType=VARCHAR},
+      zhname = #{record.zhname,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      keyss = #{record.keyss,jdbcType=VARCHAR},
+      release_date = #{record.releaseDate,jdbcType=DATE},
+      impl_date = #{record.implDate,jdbcType=DATE},
+      package_path = #{record.packagePath,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kgc.zjh.pojo.Standard" >
+    update standard
+    <set >
+      <if test="stdNum != null" >
+        std_num = #{stdNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zhname != null" >
+        zhname = #{zhname,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="keyss != null" >
+        keyss = #{keyss,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        release_date = #{releaseDate,jdbcType=DATE},
+      </if>
+      <if test="implDate != null" >
+        impl_date = #{implDate,jdbcType=DATE},
+      </if>
+      <if test="packagePath != null" >
+        package_path = #{packagePath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kgc.zjh.pojo.Standard" >
+    update standard
+    set std_num = #{stdNum,jdbcType=VARCHAR},
+      zhname = #{zhname,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      keyss = #{keyss,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=DATE},
+      impl_date = #{implDate,jdbcType=DATE},
+      package_path = #{packagePath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delPiLiang">
+    DELETE FROM standard WHERE id IN
+    <foreach collection="list" item="id"  open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </delete>
+</mapper>
